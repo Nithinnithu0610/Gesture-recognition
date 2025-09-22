@@ -1,16 +1,26 @@
-# System Architecture
+# System Architecture Diagram
 
-## Overview
-The system handles live video frames from a webcam and performs:
-- Face Recognition (existing system)
-- Gesture Recognition (new Task 3 feature)
+```mermaid
+flowchart TD
+    Camera[Camera Input] --> Preprocess[Frame Preprocessing]
 
-## Components
-- Camera Input
-- Face Recognition Module (encodings, attendance manager)
-- Gesture Recognition Module (MediaPipe Hands)
-- Logger & CSV storage
-- Display / UI (annotated frames)
+    Preprocess --> FaceRecognition[Face Recognition Module]
+    Preprocess --> GestureRecognition[Gesture Recognition Module]
 
-## Gesture Recognition specifics
-- Detect hand presence, handedness (Left/Right), finger count (0-5), and recognize thumbs up/down.
+    FaceRecognition --> Encoder[Face Encoding]
+    Encoder --> AttendanceCheck[Attendance Manager]
+    AttendanceCheck --> CSV[(Attendance.csv)]
+    AttendanceCheck --> LogFile[(performance.log)]
+
+    GestureRecognition --> HandSide[Hand Side Detection]
+    GestureRecognition --> FingerCount[Finger Counting]
+    GestureRecognition --> GestureType[Gesture Recognition]
+
+    HandSide --> GestureLogger[Logger]
+    FingerCount --> GestureLogger
+    GestureType --> GestureLogger
+    GestureLogger --> GestureLogFile[(gesture.log)]
+
+    CSV --> Teacher[Teacher/Admin View]
+    LogFile --> Developer[Developer]
+    GestureLogFile --> Developer[Developer]
