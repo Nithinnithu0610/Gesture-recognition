@@ -1,27 +1,46 @@
 # System Architecture Diagram
 
 ```mermaid
-flowchart TD
-    Camera[Camera Input] --> Preprocess[Frame Preprocessing]
+graph TD
 
-    Preprocess --> FaceRecognition[Face Recognition Module]
-    Preprocess --> GestureRecognition[Gesture Recognition Module]
+    %% Hardware
+    subgraph Hardware
+        Camera["📷 Camera
+        Input: People showing faces & gestures
+        Output: Live video (frames)"]
 
-    FaceRecognition --> Encoder[Face Encoding]
-    Encoder --> AttendanceCheck[Attendance Manager]
-    AttendanceCheck --> CSV[(Attendance.csv)]
-    AttendanceCheck --> LogFile[(performance.log)]
+        Computer["💻 Computer
+        Input: Video frames
+        Output: Sends to Software"]
+    end
 
-    GestureRecognition --> HandSide[Hand Side Detection]
-    GestureRecognition --> FingerCount[Finger Counting]
-    GestureRecognition --> GestureType[Gesture Recognition]
+    %% Software
+    subgraph Software
+        OpenCV["🖼️ OpenCV
+        Input: Video frames
+        Task: Preprocess frames (flip, resize, convert color)
+        Output: Ready frames"]
 
-    HandSide --> GestureLogger[Logger]
-    FingerCount --> GestureLogger
-    GestureType --> GestureLogger
-    GestureLogger --> GestureLogFile[(gesture.log)]
+        FaceRecognition["🙂 Face Recognition
+        Input: Processed frames + Stored faces
+        Task: Detect & recognize faces
+        Output: Person's Name / Unknown"]
 
-    CSV --> Teacher[Teacher/Admin View]
-    LogFile --> Developer[Developer]
-    GestureLogFile --> Developer[Developer]
-```
+        GestureRecognition["🤚 Gesture Recognition
+        Input: Processed frames
+        Task: Detect hand, classify Left/Right, count fingers, recognize gestures
+        Output: Hand side, finger count, gesture type"]
+
+        AttendanceManager["📒 Attendance Manager
+        Input: Person's Name / Unknown
+        Task: Mark attendance for known people
+        Output: Attendance record"]
+
+        GestureLogger["📝 Gesture Logger
+        Input: Hand info & gesture events
+        Task: Record gestures with timestamp
+        Output: Gesture logs"]
+
+        Logger["📝 System Logger
+        Input: System events & performance
+        Task: Record errors,
