@@ -43,4 +43,39 @@ graph TD
 
         Logger["📝 System Logger
         Input: System events & performance
-        Task: Record errors,
+        Task: Record errors, CPU & memory usage
+        Output: Log messages + performance details"]
+    end
+
+    %% Storage
+    subgraph Storage
+        FaceDB["🗂️ Face Database
+        Stored: Photos of employees"]
+
+        CSV["📂 Attendance.csv
+        Stored: Name, ID, Date, Time, Status"]
+
+        GestureLogFile["📄 gesture.log
+        Stored: Hand side, finger count, gestures with timestamp"]
+
+        LogFile["📄 performance.log
+        Stored: Events, Errors,
+        CPU & Memory usage,
+        Processing time"]
+    end
+
+    %% Connections
+    Camera --> Computer
+    Computer --> OpenCV
+    OpenCV --> FaceRecognition
+    OpenCV --> GestureRecognition
+
+    FaceRecognition --> AttendanceManager
+    FaceRecognition -->|Compare with| FaceDB
+    AttendanceManager --> CSV
+    AttendanceManager --> Logger
+
+    GestureRecognition --> GestureLogger
+    GestureLogger --> GestureLogFile
+
+    Logger --> LogFile
