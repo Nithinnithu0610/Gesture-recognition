@@ -1,27 +1,26 @@
-# Interview Assessment – Tasks
+# Gesture Recognition Task
 
-## Task 3 – Extend Attendance Repo with Gesture Recognition
+## Objective
+Extend the current **Face Recognition Attendance System** by adding **Hand Gesture Detection** features.
 
-### Objective
-Enhance the existing Face Recognition Attendance System by adding **Hand Gesture Detection** features.
+The system should be able to:
+1. Detect **if a hand is present** in the camera feed.
+2. Identify **which hand it is** (Left Hand or Right Hand).
+3. Count the **number of fingers** being shown.
+4. Recognize **specific gestures** like:
+   - 👍 Thumbs Up
+   - 👎 Thumbs Down
 
-### Features Implemented
-- Detect presence of hand in camera feed  
-- Identify Left Hand or Right Hand  
-- Count number of fingers extended  
-- Recognize gestures: 👍 Thumbs Up, 👎 Thumbs Down  
+---
 
-### Dependencies
-- mediapipe
-- opencv-python
+## Inputs & Outputs
 
-### How to Run
-```bash
-pip install mediapipe opencv-python
-python execute.py
-```
+### Input
+- **Live video frames** from the Camera (same input source as face recognition).
+- Frames may contain **hands** with different poses and gestures.
 
 ### Output
-- Face recognition + attendance logging (as before)  
-- Overlay of hand type, finger count, and recognized gesture  
-- Press `q` to exit  
+- **Hand Presence**: "Hand Detected" or "No Hand".
+- **Hand Side**: "Left Hand" or "Right Hand".
+- **Finger Count**: Number of fingers shown (0–5).
+- **Gesture Type**: "Thumbs Up", "Thumbs Down", or "Other".
