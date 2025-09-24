@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Saved frames and outputs
+frames/
+outputs/
+outputs_smolvlm/
+
+# Benchmark results
+benchmarks/*.csv
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
