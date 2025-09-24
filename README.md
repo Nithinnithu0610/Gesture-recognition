@@ -1,40 +1,111 @@
+# Task 3 – Gesture Recognition
 
-# Task_3_final - Gesture Recognition (Prepared for Submission)
+## 📌 Overview
+This project implements a **gesture recognition system** using OpenCV / MediaPipe along with a secondary module using **SmolVLM**.  
+It captures gestures, saves input frames, logs detection outputs, monitors system usage, and provides benchmark comparisons.  
 
-This folder merges your uploaded Task 3 files and adds the missing pieces required by the reviewer:
-- System usage logging (CPU & memory)
-- Gesture outputs logging
-- Saving frames for detected gestures
-- A second 'SmolVLM' module (placeholder + integration notes)
-- Benchmark scripts to compare OpenCV/MediaPipe vs SmolVLM
-- requirements.txt and organized docs
+This repository satisfies the reviewer’s requirements:
+- Logs CPU & memory usage
+- Logs gesture detection outputs
+- Saves at least 3 frames for each gesture
+- Provides requirements.txt for dependencies
+- Implements and compares a second gesture detection module (SmolVLM)
+- Includes benchmark results and diagrams/documentation
 
-**How to run (example)**
+---
 
-1. Create a virtual environment and install dependencies
-```
+## 📂 Repository Structure
+
+Gesture-recognition/
+├── README.md
+├── requirements.txt
+├── execute.py
+├── gesture_recognition.py
+├── system_monitor.py
+├── smolvlm_module/
+│ └── smolvlm_module.py
+├── benchmarks/
+│ ├── run_benchmarks.py
+│ └── results_summary.csv
+├── frames/
+│ ├── right_index_thumb_open_1.png
+│ ├── ...
+│ └── both_hands_3.png
+├── logs/
+│ ├── gesture_outputs.log
+│ └── system_usage.log
+├── docs/
+│ ├── architecture.md
+│ ├── dfd.md
+│ ├── sequence.md
+│ ├── gesture.md
+│ └── task.md
+
+yaml
+Copy code
+
+---
+
+## 🛠️ Setup
+
+Create a virtual environment and install dependencies:
+
+```bash
 python -m venv venv
-source venv/bin/activate   # on Windows: venv\Scripts\activate
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```
+▶️ Usage
+Run the main gesture recognition (OpenCV + MediaPipe):
 
-2. Run the main detector (OpenCV + MediaPipe) on a video or webcam:
-```
+bash
+Copy code
 python execute.py --input sample_video.mp4 --out_dir ./outputs --use_video
-```
+Run the SmolVLM module:
 
-3. Run SmolVLM module (placeholder) similarly:
-```
+bash
+Copy code
 python smolvlm_module/smolvlm_module.py --input sample_video.mp4 --out_dir ./outputs_smolvlm
-```
+Run benchmarks:
 
-4. Run benchmarks:
-```
+bash
+Copy code
 python benchmarks/run_benchmarks.py --input_dir ./sample_videos --output benchmarks/results_summary.csv
-```
+🧪 Supported Gestures
+Right hand – index finger & thumb open
 
-See docs/ for diagrams and task details (copied from your uploads).
+Left hand – down
 
-Notes:
-- The SmolVLM module is prepared as an integration wrapper and includes instructions on how to connect a real SmolVLM model (link to interview task provided).
-- Example `benchmarks/results_summary.csv` is included with sample numbers for demonstration. Replace with real run results after executing the scripts.
+Right hand – thumbs up
+
+Right hand – down
+
+Both hands simultaneously:
+
+Right hand → thumbs up
+
+Left hand → thumbs down
+
+At least 3 frames per gesture are included under frames/.
+
+📊 Results & Logs
+Gesture detections → logs/gesture_outputs.log
+
+System usage (CPU, memory) → logs/system_usage.log
+
+Benchmark results → benchmarks/results_summary.csv
+
+📖 Documentation
+Detailed design docs are in docs/:
+
+architecture.md
+
+dfd.md
+
+sequence.md
+
+gesture.md
+
+task.md
+
+👨‍💻 Author
+Nithin H
